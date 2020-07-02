@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `operation_cloture` (
+  `id_op` int(20) NOT NULL,
+  `date_cloture` date NOT NULL,
+  `numero_decesion` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_op`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
