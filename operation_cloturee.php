@@ -40,19 +40,19 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' ){
 				
 		<?php if ( $user->type=='Admin_psc') {?>
                 <div class="page-title">                    
-                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées (Programme Sectoriel Centralisé)</h3>
+                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées etat clôturé (Programme Sectoriel Centralisé)</h3>
 					
                 </div>
 		<?php }else   if ( $user->type=='Admin_psd') { ?>	
 				
 				<div class="page-title">                    
-                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées  (Programme Sectoriel Déconcentré)</h3>
+                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées etat clôturé (Programme Sectoriel Déconcentré)</h3>
 					
                 </div>
 				
-		<?php }else if ($user->type=='administrateur'){?>
+		<?php }else if ($user->type=='administrateur' or $user->type="ministre_SG"){?>
 		     <div class="page-title">                    
-                    <h2><span class="fa fa-folder-open"></span> Les opérations planifiées</h2>
+                    <h2><span class="fa fa-folder-open"></span> Les opérations planifiées etat clôturé</h2>
 					
                 </div>
 				<?php } ?>
@@ -157,7 +157,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' ){
 					  
 					  
 					  
-							 <?php  }else if($user->type=='administrateur'){ ?>
+							 <?php  }else if($user->type=='administrateur' or $user->type="ministre_SG"){ ?>
 					  
 					   <div class="col-md-8">
                                       <div class="form-group">   
@@ -167,7 +167,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' ){
 																			
                                                      <option value="-2"> Sélectionner  gestionnaire</option>
 															
-															  <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur ");
+															  <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur where id_ord!=1");
 															while ($rows = $bd->fetch_array($SQL))
 														{
 														
@@ -215,7 +215,7 @@ function lister_projet($ordonnateur,$user){
 								
 								
 								
-								<?php if($user->type=='Admin_psc' or $user->type=='Admin_psd' or $user->type=='administrateur') { ?>
+								<?php if($user->type=='Admin_psc' or $user->type=='Admin_psd' or $user->type=='administrateur' or $user->type="ministre_SG") { ?>
                                     <div class="tab-pane active" >
                                           <div class="page-content-wrap">
        			

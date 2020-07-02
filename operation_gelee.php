@@ -2,18 +2,18 @@
 require_once("includes/initialiser.php");
 if(!$session->is_logged_in()) {
 
-	readresser_a("login.php");
+ readresser_a("login.php");
 
 }else{
-	$user = Personne::trouve_par_id($session->id_utilisateur);
-	$accestype = array('administrateur' or 'Admin_dsp' or 'Admin_psd' );
-	if( !in_array($user->type,$accestype)){ 
-		//contenir_composition_template('simple_header.php'); 
-		$msg_system ="Accès non autorisé!  ccsdcsdc";
-		echo system_message($msg_system);
-		// contenir_composition_template('simple_footer.php');
-		exit();
-	} 
+ $user = Personne::trouve_par_id($session->id_utilisateur);
+ $accestype = array('administrateur' or 'Admin_dsp' or 'Admin_psd' );
+ if( !in_array($user->type,$accestype)){ 
+  //contenir_composition_template('simple_header.php'); 
+  $msg_system ="Accès non autorisé!  ccsdcsdc";
+  echo system_message($msg_system);
+  // contenir_composition_template('simple_footer.php');
+  exit();
+ } 
 
 }
 ?>
@@ -21,8 +21,8 @@ if(!$session->is_logged_in()) {
 $titre = "Les opérations planifiées";
 $active_menu = "index";
 $header = array('personne');
-if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' ){
-	require_once("composit/header.php");
+if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' or 'ministre_SG' ){
+ require_once("composit/header.php");
     
 }
 ?>
@@ -30,32 +30,32 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' ){
              
                    <ul class="breadcrumb">
                   <li><a href="index.php">Acceuil</a></li>  
-					  <li class="active"><?php echo $titre ?></li>  
+       <li class="active"><?php echo $titre ?></li>  
                 </ul>
                 <!-- END BREADCRUMB -->
                 <!-- PAGE TITLE -->
-				
-				
-				
-				
-		<?php if ( $user->type=='Admin_psc') {?>
+    
+    
+    
+    
+  <?php if ( $user->type=='Admin_psc') {?>
                 <div class="page-title">                    
-                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées (Programme Sectoriel Centralisé)</h3>
-					
+                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées etat gelé(Programme Sectoriel Centralisé)</h3>
+     
                 </div>
-		<?php }else   if ( $user->type=='Admin_psd') { ?>	
-				
-				<div class="page-title">                    
-                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées  (Programme Sectoriel Déconcentré)</h3>
-					
+  <?php }else   if ( $user->type=='Admin_psd') { ?> 
+    
+    <div class="page-title">                    
+                    <h3><span class="fa fa-folder-open"></span> Les opérations planifiées etat gelé (Programme Sectoriel Déconcentré)</h3>
+     
                 </div>
-				
-		<?php }else if ($user->type=='administrateur'){?>
-		     <div class="page-title">                    
-                    <h2><span class="fa fa-folder-open"></span> Les opérations planifiées</h2>
-					
+    
+  <?php }else if ($user->type=='administrateur' or $user->type="ministre_SG"){?>
+       <div class="page-title">                    
+                    <h2><span class="fa fa-folder-open"></span> Les opérations planifiées etat gelé</h2>
+     
                 </div>
-				<?php } ?>
+    <?php } ?>
                 <!-- END PAGE TITLE -->
           
                 <!-- PAGE CONTENT WRAPPER -->
@@ -66,159 +66,159 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_psd' ){
                           <form class="form-horizontal" name="ajouter_stru" id = "ajouter_stru" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
                             <div class="panel panel-info">
                                 
-                     		
+                       
                                                                                                        
               
-							 </div>
-							
-							   <div class="panel-footer">
-							   <div class="row">
-							 <?php  if($user->type=='Admin_psc') { ?>
-							   <div class="col-md-8">
+        </div>
+       
+          <div class="panel-footer">
+          <div class="row">
+        <?php  if($user->type=='Admin_psc') { ?>
+          <div class="col-md-8">
                                       <div class="form-group">   
-                                              <label class="col-md-3 col-xs-12  control-label"> Gestionnaire :</label>											
+                                              <label class="col-md-3 col-xs-12  control-label"> Gestionnaire :</label>           
                                              <div class="col-md-4 col-xs-12">    
-	                                                  <select class="form-control select" id="id_ord1"  name="id_ord1" data-live-search="true" required />
-																			
+                                                   <select class="form-control select" id="id_ord1"  name="id_ord1" data-live-search="true" required />
+                   
                                                      <option value="-2"> Sélectionner gestionnaire</option>
-															
-															  <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur ");
-															while ($rows = $bd->fetch_array($SQL))
-														{
-														
-															if(($user->type=='Admin_psc' or $user->type=='administrateur') and  $rows["id_prog"]==41){
-																
-														echo '<option  value = "'.$rows["id_ord"].'" >'.$rows["nom_ord"].'</option>';
-														}
-														
-														}
-															if($user->type=='Admin_chu' or $user->type=='Admin_est' or $user->type=='Admin_ehs' or $user->type=='Admin_msprh'){
-																$ordonnaateur=Ordonnateur::trouve_par_id($user->id_ord);
-															
-														echo '<option  value = "'.$ordonnaateur->id_ord.'" >'.$ordonnaateur->nom_ord.'</option>';
-															
-															}
-														?>
-														
-                                                        																			
-														</select>   
+               
+                 <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur ");
+               while ($rows = $bd->fetch_array($SQL))
+              {
+              
+               if(($user->type=='Admin_psc' or $user->type=='administrateur' ) and  $rows["id_prog"]==41){
+                
+              echo '<option  value = "'.$rows["id_ord"].'" >'.$rows["nom_ord"].'</option>';
+              }
+              
+              }
+               if($user->type=='Admin_chu' or $user->type=='Admin_est' or $user->type=='Admin_ehs' or $user->type=='Admin_msprh'){
+                $ordonnaateur=Ordonnateur::trouve_par_id($user->id_ord);
+               
+              echo '<option  value = "'.$ordonnaateur->id_ord.'" >'.$ordonnaateur->nom_ord.'</option>';
+               
+               }
+              ?>
+              
+                                                                           
+              </select>   
                                               </div>
                                             </div>   
-								</div>
-								<div class="col-md-4">											
+        </div>
+        <div class="col-md-4">           
                                     <button class="btn btn-info pull-left" type ="submit" name ="submit2" id ="submit2">Lister</button>
-								</div>
-									</div><!--fin row -->
+        </div>
+         </div><!--fin row -->
                                 </div> 
-							
+       
                         
-						
-							 <?php } else  if($user->type=='Admin_psd') {?>
+      
+        <?php } else  if($user->type=='Admin_psd') {?>
                            
                        <div class="col-md-8">
                                       <div class="form-group">   
-                                              <label class="col-md-3 col-xs-12  control-label"> Gestionnaire :</label>											
+                                              <label class="col-md-3 col-xs-12  control-label"> Gestionnaire :</label>           
                                              <div class="col-md-4 col-xs-12">    
-	                                                  <select class="form-control select" id="id_ord1"  name="id_ord1" data-live-search="true" required />
-																			
+                                                   <select class="form-control select" id="id_ord1"  name="id_ord1" data-live-search="true" required />
+                   
                                                      <option value="-2"> Sélectionné  gestionnaire</option>
-															
-															  <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur ");
-															while ($rows = $bd->fetch_array($SQL))
-														{
-														
-															if(($user->type=='Admin_psd' or $user->type=='administrateur') and  $rows["id_prog"]==42){
-																
-														echo '<option  value = "'.$rows["id_ord"].'" >'.$rows["nom_ord"].'</option>';
-														}
-														
-														}
-															if($user->type=='Admin_dsp'){
-																$ordonnaateur=Ordonnateur::trouve_par_id($user->id_ord);
-															
-														echo '<option  value = "'.$ordonnaateur->id_ord.'" >'.$ordonnaateur->nom_ord.'</option>';
-															
-															}
-														?>
-														
-                                                        																			
-														</select>   
+               
+                 <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur ");
+               while ($rows = $bd->fetch_array($SQL))
+              {
+              
+               if(($user->type=='Admin_psd' or $user->type=='administrateur' or $user->type="ministre_SG") and  $rows["id_prog"]==42){
+                
+              echo '<option  value = "'.$rows["id_ord"].'" >'.$rows["nom_ord"].'</option>';
+              }
+              
+              }
+               if($user->type=='Admin_dsp'){
+                $ordonnaateur=Ordonnateur::trouve_par_id($user->id_ord);
+               
+              echo '<option  value = "'.$ordonnaateur->id_ord.'" >'.$ordonnaateur->nom_ord.'</option>';
+               
+               }
+              ?>
+              
+                                                                           
+              </select>   
                                               </div>
                                             </div>   
-								</div>
-								<div class="col-md-4">											
+        </div>
+        <div class="col-md-4">           
                                     <button class="btn btn-info pull-left" type ="submit" name ="submit2" id ="submit2">Lister</button>
-								</div>
-									</div><!--fin row -->
+        </div>
+         </div><!--fin row -->
                                 </div> 
-							
+       
                         </form>
-						 </div>
-					  
-					  
-					  
-							 <?php  }else if($user->type=='administrateur'){ ?>
-					  
-					   <div class="col-md-8">
+       </div>
+       
+       
+       
+        <?php  }else if($user->type=='administrateur' or $user->type="ministre_SG"){ ?>
+       
+        <div class="col-md-8">
                                       <div class="form-group">   
-                                              <label class="col-md-3 col-xs-12  control-label"> Gestionnaire :</label>											
+                                              <label class="col-md-3 col-xs-12  control-label"> Gestionnaire :</label>           
                                              <div class="col-md-4 col-xs-12">    
-	                                                  <select class="form-control select" id="id_ord1"  name="id_ord1" data-live-search="true" required />
-																			
+                                                   <select class="form-control select" id="id_ord1"  name="id_ord1" data-live-search="true" required />
+                   
                                                      <option value="-2"> Sélectionné  gestionnaire</option>
-															
-															  <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur ");
-															while ($rows = $bd->fetch_array($SQL))
-														{
-														
-														
-																
-														echo '<option  value = "'.$rows["id_ord"].'" >'.$rows["nom_ord"].'</option>';
-														}
-														
-														
-															
-														
-														?>
-														
-                                                        																			
-														</select>   
+               
+                 <?php $SQL = $bd->requete("SELECT * FROM   ordonnateur  where id_ord!=1");
+               while ($rows = $bd->fetch_array($SQL))
+              {
+              
+              
+                
+              echo '<option  value = "'.$rows["id_ord"].'" >'.$rows["nom_ord"].'</option>';
+              }
+              
+              
+               
+              
+              ?>
+              
+                                                                           
+              </select>   
                                               </div>
                                             </div>   
-								</div>
-								<div class="col-md-4">											
+        </div>
+        <div class="col-md-4">           
                                     <button class="btn btn-info pull-left" type ="submit" name ="submit2" id ="submit2">Lister</button>
-								</div>
-									</div><!--fin row -->
+        </div>
+         </div><!--fin row -->
                                 </div> 
-							 <?php } ?>
-					  
-					  
-                    		<?php 
+        <?php } ?>
+       
+       
+                      <?php 
 function lister_projet($ordonnateur,$user){
-	global $bd;
+ global $bd;
 
-		?>
+  ?>
 
                                 
       
                 
                     <!-- START DEFAULT DATATABLE -->
                           
-								
-								
-								<div class="col-md-12">                        
+        
+        
+        <div class="col-md-12">                        
                             <!-- START JUSTIFIED TABS -->
                             <div class="panel panel-default ">
                                 
                                 <div class="panel-body tab-content">
-								
-								
-								
-								<?php if($user->type=='Admin_psc' or $user->type=='Admin_psd' or $user->type=='administrateur' ) { ?>
+        
+        
+        
+        <?php if($user->type=='Admin_psc' or $user->type=='Admin_psd' or $user->type=='administrateur' or $user->type="ministre_SG" ) { ?>
                                     <div class="tab-pane active" >
                                           <div class="page-content-wrap">
-       			
+          
                <div class="page-content-wrap">                
                 
                     <div class="row">
@@ -227,86 +227,86 @@ function lister_projet($ordonnateur,$user){
                             <!-- START DEFAULT DATATABLE -->
                             <div class="panel panel-seccess">
                                 <div class="panel-heading">                                
-                                  	 <h3 class="panel-title"><strong>| Liste des opérations planifiées <span style="color:red;font-weight:bold"> &nbsp; Gelée</span>&nbsp; du  :&nbsp; <span style="color:#1caf9a;font-weight:bold"><?php if ( $ord=Ordonnateur::trouve_par_id($ordonnateur)){ echo $ord->nom_ord;}else{}?> </span></strong></h3>
-								
+                                    <h3 class="panel-title"><strong>| Liste des opérations planifiées <span style="color:red;font-weight:bold"> &nbsp; Gelée</span>&nbsp; du  :&nbsp; <span style="color:#1caf9a;font-weight:bold"><?php if ( $ord=Ordonnateur::trouve_par_id($ordonnateur)){ echo $ord->nom_ord;}else{}?> </span></strong></h3>
+        
                                                                   
                                 </div>
                                 <div class="panel-body">
-								<div class="scrollable">
+        <div class="scrollable">
                                     <table class="table datatable table-triped">
                                         <thead>
                                             <tr>
-											<th>N° d'opération</th>
-										    <th> Intitulé d'opération</th>
+           <th>N° d'opération</th>
+              <th> Intitulé d'opération</th>
                                             <th>Date d'inscription</th>
-												    <?php 
-										$ordo=Ordonnateur::trouve_par_id($ordonnateur);
+                <?php 
+          $ordo=Ordonnateur::trouve_par_id($ordonnateur);
                                 
-										if($ordo->id_prog==42){
-										?>
-										<th>Type de programme</th>
-										<?php } ?>
-										
+          if($ordo->id_prog==42){
+          ?>
+          <th>Type de programme</th>
+          <?php } ?>
+          
                                               <th>AP Actuelle </th>
                                               <th>AP Engagée </th>
                                               <th>paiements</th>
-										      <th>PEC</th>
-											  <th>Taux</th>
-											  <th>Observation</th>
-												
+                <th>PEC</th>
+             <th>Taux</th>
+             <th>Observation</th>
+            
                                               
                                             </tr>
                                         </thead>
-										 <tbody>
-									<?php
-									if ($operations=Operation::trouve_filtre_ord($ordonnateur)){
-								
+           <tbody>
+         <?php
+         if ($operations=Operation::trouve_filtre_ord($ordonnateur)){
+        
 foreach($operations as $operation){
-	$ordonnateur=Ordonnateur::trouve_par_id($operation->id_ord);
-			if($situation_f = Situation_f::trouve_par_operation2($operation->id_op)){
-				
+ $ordonnateur=Ordonnateur::trouve_par_id($operation->id_ord);
+   if($situation_f = Situation_f::trouve_par_operation2($operation->id_op)){
+    
 if($situation_f->etat_operation=='Gelee' and $situation_f->valider==1 ){
-									?>
+         ?>
                                       <?php 
-									  $APacc=0;
-									if(  $operation=Operation::trouve_par_id($situation_f->id_op)){
-									  $APacc=$APacc+$operation->ap_initial  ;
-									}
-									   $operation_modifs=Operation_modif::trouve_tous_reev($situation_f->id_op);
-									   foreach($operation_modifs as $operation_modif){
-										$APacc = $APacc+ $operation_modif->reev;
-									   }
-									  ?>
+           $APacc=0;
+         if(  $operation=Operation::trouve_par_id($situation_f->id_op)){
+           $APacc=$APacc+$operation->ap_initial  ;
+         }
+            $operation_modifs=Operation_modif::trouve_tous_reev($situation_f->id_op);
+            foreach($operation_modifs as $operation_modif){
+          $APacc = $APacc+ $operation_modif->reev;
+            }
+           ?>
                                             <tr id ="<?php echo html_entity_decode($situation_f->id_situation_f); ?>">
-											<td><?php $rub=Rubrique::trouve_par_code($operation->code_rubrique); echo html_entity_decode($rub->nom_rubrique);  ?></td>
-										
-											<td><?php $operation = Operation:: trouve_par_id($situation_f->id_op); echo html_entity_decode($operation->num_op);  ?></td>
+           <td><?php $rub=Rubrique::trouve_par_code($operation->code_rubrique); echo html_entity_decode($rub->nom_rubrique);  ?></td>
+          
+           <td><?php $operation = Operation:: trouve_par_id($situation_f->id_op); echo html_entity_decode($operation->num_op);  ?></td>
                                               
-											  <td><?php $operation = Operation:: trouve_par_id($situation_f->id_op); echo html_entity_decode($operation->libelle_op);  ?></td>
+             <td><?php $operation = Operation:: trouve_par_id($situation_f->id_op); echo html_entity_decode($operation->libelle_op);  ?></td>
                                                <td><?php $operation = Operation:: trouve_par_id($situation_f->id_op); echo html_entity_decode($operation->date_inscription);  ?></td>
                                           <?php 
                                        if($ordonnateur->id_prog==42){
-									   ?>
-										  <td>
-										   <?php
-										   	$top="";
-									        if($operation->topographie=="PN") $top="Programme normal";
-									        if($operation->topographie=="PHP") $top="Programme spécial hauts plateaux";
-									        if($operation->topographie=="PS") $top="Programme spécial Sud";
-												echo "<option value=".$operation->topographie.">".html_entity_decode($top)."</option>"; ?>
-											
-										   </td>
-				                        <?php } ?>
-										
+            ?>
+            <td>
+             <?php
+              $top="";
+                 if($operation->topographie=="PN") $top="Programme normal";
+                 if($operation->topographie=="PHP") $top="Programme spécial hauts plateaux";
+                 if($operation->topographie=="PS") $top="Programme spécial Sud";
+            echo "<option value=".$operation->topographie.">".html_entity_decode($top)."</option>"; ?>
+           
+             </td>
+                            <?php } ?>
+          
                                                <td><?php echo html_entity_decode($APacc); ?></td> <!-- APACtuel-->
-												 <td><?php echo html_entity_decode($situation_f->ap_engag); ?></td>
-												  <td><?php echo html_entity_decode($situation_f->paiements); ?></td>
-												     <td><?php echo html_entity_decode($APacc-$situation_f->paiements); ?></td><!-- PEC-->
-						
-												   <td><?php  if ($APacc!=0){echo html_entity_decode (number_format($situation_f->paiements/$APacc*100,2,'.','').'%');}else echo 0.00; ?></td><!-- taux-->
-												
+             <td><?php echo html_entity_decode($situation_f->ap_engag); ?></td>
+              <td><?php echo html_entity_decode($situation_f->paiements); ?></td>
+                 <td><?php echo html_entity_decode($APacc-$situation_f->paiements); ?></td><!-- PEC-->
+      
+               <td><?php  if ($APacc!=0){echo html_entity_decode (number_format($situation_f->paiements/$APacc*100,2,'.','').'%');}else echo 0.00; ?></td><!-- taux-->
+            
                                                  <td><?php echo html_entity_decode($situation_f->obs); ?></td>
-											
+           
                                               
                                             
                                             </tr>
@@ -317,13 +317,13 @@ if($situation_f->etat_operation=='Gelee' and $situation_f->valider==1 ){
 
 }}
 }
-									
+         
                                  ?>  
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-							 </div>
+        </div>
                 <!-- END PAGE CONTENT WRAPPER -->                                                
             </div>            
             <!-- END PAGE CONTENT -->
@@ -333,28 +333,28 @@ if($situation_f->etat_operation=='Gelee' and $situation_f->valider==1 ){
                      
             <!-- END PAGE CONTENT -->
         </div>   </div>
-		
+  
      <?php }  ?>
                                 
-								 
-								 <?php } 
+         
+         <?php } 
  //fin fonction lister_projet 
 //****************************************
 if(isset($_POST['submit2'])){
 
 $ordonnateur=$_POST['id_ord1'];
-lister_projet($ordonnateur,$user);	
-	
+lister_projet($ordonnateur,$user); 
+ 
 }
 
 ?>
-                                     								
+                                             
                              
                                    
                            
             <!-- END PAGE CONTENT -->
         </div>
-								 
+         
         <!-- MESSAGE BOX-->
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
@@ -373,7 +373,7 @@ lister_projet($ordonnateur,$user);
                 </div>
             </div>
         </div>
-		<div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
+  <div class="message-box animated fadeIn" data-sound="alert" id="mb-remove-row">
             <div class="mb-container">
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-times"></span> Supprimer <strong> les données </strong> ?</div>
@@ -390,9 +390,9 @@ lister_projet($ordonnateur,$user);
                 </div>
             </div>
         </div>
-		
-		
-	             <style>
+  
+  
+              <style>
 
  
    .scrollable {
@@ -400,13 +400,13 @@ lister_projet($ordonnateur,$user);
       width: 100%;
       overflow-x: scroll !important ;
     
-	  white-space: nowrap;
+   white-space: nowrap;
  
-	  
-   		
+   
+     
  
-	
-	</style>
+ 
+ </style>
        <!-- END MESSAGE BOX-->
        
         <!-- START PRELOADS -->
