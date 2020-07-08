@@ -78,6 +78,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
                                             <tr>
 											
 											<th>Personne</th>
+                                            <th>Nom et Prénom</th>
 												<th>Objet </th>
 												 <th>Reçu</th>
 										
@@ -98,8 +99,9 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 										
 									
 								?>
-                                    <tr  style=" font-weight:bold" id="<?php echo $message->id_mess; ?>">
-										 <td> De : <?php $personne = Personne:: trouve_par_id($message->id_expediteur ); echo html_entity_decode($personne->nom_compler()); ?></td>
+                                    <tr  style="" id="<?php echo $message->id_mess; ?>">
+                                         <td> De : <?php $personne = Personne:: trouve_par_id($message->id_expediteur ); echo html_entity_decode($personne->login); ?></td>
+										 <td>  <?php $personne = Personne:: trouve_par_id($message->id_expediteur ); echo html_entity_decode($personne->nom_compler()); ?></td>
 										 <td><?php echo html_entity_decode($message->objet); ?></td>
 										 <td ><span class=""><?php echo  html_entity_decode($message->dat_env); ?></span></td>
 									     <td><span style=""><?php echo html_entity_decode($message->message); ?></td>

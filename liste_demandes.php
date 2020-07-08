@@ -63,7 +63,8 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
                                     </ul>                                
                                 </div>
                                 <div class="panel-body">
-                                    <table class="table datatable table-striped">
+                                    <div class="scrollable">
+                                    <table  id="table0" class="table-bordered">
                                         <thead>
                                             <tr>
 											    <th>Date de la demande</th>
@@ -72,8 +73,8 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 											    <th>Numéro de decision </th>
 											    <th>Ancien Numéro d'opération</th>
 											    <th>Nouveau Numéro d'opération</th>
-												<th>Ancien intitulé d'operation</th>
-                                                <th>Nouveau intitulé operation</th>
+												<th>Ancien intitulé d'opération</th>
+                                                <th>Nouveau intitulé opération</th>
 												<th>Réévaluation  </th>
 												<th>dévaluation  </th>
                                               	<th>User</th>
@@ -97,7 +98,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 										<td style="<?php if($operation->numero_op!="") { ?> color:red <?php } ?>"><span class=""><?php echo html_entity_decode($operation->a_numero_op); ?></a></td>
 											<td style="color:green;font-weight:bold"><span class=""><?php echo html_entity_decode($operation->numero_op); ?></a></td>
 											<td style="<?php if($operation->nom_oper!="") { ?> color:red <?php } ?>"><span class=""><?php  echo html_entity_decode($operation->a_nom_oper); ?></a></td>
-											<td style="color:green;font-weight:bold"><span class=""><?php echo html_entity_decode($operation->nom_oper); ?></a></td>
+											<td style="color:green;font-weight:bold"><span class=""><?php echo stripslashes($operation->nom_oper)."zzz"; ?></a></td>
 											<td style="color:green;font-weight:bold"><span class=""><?php if($operation->reev>0) echo html_entity_decode(abs($operation->reev)); ?></a></td>
 										   <td style="color:green;font-weight:bold"><span class=""><?php if($operation->reev<0) echo html_entity_decode(abs($operation->reev)); ?></a></td>
 										   
@@ -126,7 +127,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 										<td style="<?php if($operation->numero_op!="") { ?> color:red <?php } ?>"><span class=""><?php echo html_entity_decode($operation->a_numero_op); ?></a></td>
 											<td style="color:green;font-weight:bold"><span class=""><?php echo html_entity_decode($operation->numero_op); ?></a></td>
 											<td style="<?php if($operation->nom_oper!="") { ?> color:red <?php } ?>"><span class=""><?php  echo html_entity_decode($operation->a_nom_oper); ?></a></td>
-											<td style="color:green;font-weight:bold"><span class=""><?php echo html_entity_decode($operation->nom_oper); ?></a></td>
+											<td style="color:green;font-weight:bold"><span class=""><?php echo stripslashes($operation->nom_oper); ?></a></td>
 											<td style="color:green;font-weight:bold"><span class=""><?php if($operation->reev>0) echo html_entity_decode(abs($operation->reev)); ?></a></td>
 										   <td style="color:green;font-weight:bold"><span class=""><?php if($operation->reev<0) echo html_entity_decode(abs($operation->reev)); ?></a></td>
 										    
@@ -143,6 +144,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 								}
                                  ?>       </tbody>
                                     </table>
+                                </div>
                                 </div>
                             </div>
                 <!-- END PAGE CONTENT WRAPPER -->                                                
@@ -185,33 +187,65 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
                 </div>
             </div>
         </div>
-		
+      
        <!-- END MESSAGE BOX-->
        
         <!-- START PRELOADS -->
-        <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
-        <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-        <!-- END PRELOADS -->                
+      <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
+    <!-- END PRELOADS -->             
+
     <!-- START SCRIPTS -->
-        <!-- START PLUGINS -->
-        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>                
-        <!-- END PLUGINS -->
-        
-        <!-- THIS PAGE PLUGINS -->
-        <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
-        <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-              <script type="text/javascript" src="js/demo_tables.js"></script>          
-        <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>   
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
-        <script type="text/javascript" src="js/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-        <!-- END THIS PAGE PLUGINS -->       
-        <!-- START TEMPLATE -->
-        <script type="text/javascript" src="js/plugins.js"></script>        
-        <script type="text/javascript" src="js/actions.js"></script>        
-        <!-- END TEMPLATE -->    
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>                
+    <!-- END PLUGINS -->
+
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+    <script type="text/javascript" src="js/demo_tables.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
+    <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+    <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="js/demo_tables.js"></script> 
+    <script type="text/javascript" src="js/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>    
+    <script type="text/javascript" src="js/dataTables.fixedColumns.min.js"></script> 
+    <!-- END THIS PAGE PLUGINS -->       
+
+    <!-- START TEMPLATE -->
+
+    <script type="text/javascript" src="js/plugins.js"></script>        
+    <script type="text/javascript" src="js/actions.js"></script>  
+      <script type="text/javascript">
+        $('#table0').dataTable( 
+{
+    "columnDefs": [
+ 
+        { "width": "100px", "targets": 11 },
+        { "width": "130px", "targets": 0 },
+         { "width": "70px", "targets": 2 },
+
+       
+       
+    
+
+    ],
+    "searching": true,
+    "paging":true,
+    "ordering": false,
+    "scrollX": "170%", 
+
+
+} ); 
+$(document).ready(function(){
+    document.getElementById('table0').scrollIntoView({ inline:'end' });
+});
+         </script>
     <!-- END SCRIPTS -->                   
     </body>
 </html>

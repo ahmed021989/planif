@@ -82,6 +82,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 												
 											 <th>Date d'envoi</th>
 											<th>Destinataire</th>
+                                            <th>Nom et prénom</th>
 												<th>objet </th>
 												 <th>message</th>
 												   <th>Statut du message</th>
@@ -94,8 +95,10 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 										$messaages=Message :: trouve_tous_id_expediteur($user);
 							foreach($messaages as $message){
 									?>
-                                            <tr  style=" font-weight:bold" id="<?php echo $message->id_mess; ?>">
+                                         <tr  style=" font-weight:<?php if($message->lire_mess!=-2){ ?>  bold <?php } ?> " id="<?php echo $message->id_mess; ?>">
 										 <td ><?php echo  html_entity_decode($message->dat_env); ?></td>
+                                          <td> <?php  if ($personne = Personne:: trouve_par_id($message-> id_destinataire)) {
+                                             echo html_entity_decode($personne->login); }?></td>
 										    <td> <?php  if ($personne = Personne:: trouve_par_id($message-> id_destinataire)) {
 											 echo html_entity_decode($personne->nom_compler()); }?></td>
 											
@@ -105,7 +108,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 											<?php if ($message->lire_mess==-2){ ?>
 											<td><strong>Lu </strong></td>
 							<?php } else {?>
-						<td><strong> No Lu </strong> </td>
+						<td><strong> Non Lu </strong> </td>
 							<?php } ?>
 								<td>
 									<a style="color:#ff0000;font-size:20px" href="confirme_supp_env.php?id_mess=<?php echo $message->id_mess;?>" class="fa fa-trash-o"></a>
