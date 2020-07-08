@@ -1239,17 +1239,7 @@
 					
 							
 					
-										 <!-- MESSAGES -->
-										  <?php if ($user->type=='administrateur' or $user->type=='Admin_psd'){ ?>
-					   <li class="xn-icon-button pull-right">
-                        <a href="liste_operation_non_valide.php"><span class="fa fa-bell-o" data-placement="bottom" data-toggle="tooltip" title="Opération en cours de validation "></span></a>
-                        <div class="informer informer-danger"><?php  $SQL = $bd->requete("SELECT * FROM  operation  WHERE valider=0 ") ;
-																			$nbr = mysqli_num_rows($SQL);
-																		if($nbr!=0) { echo $nbr;}
-																			?></div>
-                                              
-                    </li>
-					 <?php } ?>
+							
 										 
 					 <?php if ($user->type=='administrateur' or $user->type=='Admin_psd'){ ?>
                     <li class="xn-icon-button pull-right">
