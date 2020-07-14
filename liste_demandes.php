@@ -98,7 +98,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
 										<td style="<?php if($operation->numero_op!="") { ?> color:red <?php } ?>"><span class=""><?php echo html_entity_decode($operation->a_numero_op); ?></a></td>
 											<td style="color:green;font-weight:bold"><span class=""><?php echo html_entity_decode($operation->numero_op); ?></a></td>
 											<td style="<?php if($operation->nom_oper!="") { ?> color:red <?php } ?>"><span class=""><?php  echo html_entity_decode($operation->a_nom_oper); ?></a></td>
-											<td style="color:green;font-weight:bold"><span class=""><?php echo stripslashes($operation->nom_oper)."zzz"; ?></a></td>
+											<td style="color:green;font-weight:bold"><span class=""><?php echo stripslashes($operation->nom_oper); ?></a></td>
 											<td style="color:green;font-weight:bold"><span class=""><?php if($operation->reev>0) echo html_entity_decode(abs($operation->reev)); ?></a></td>
 										   <td style="color:green;font-weight:bold"><span class=""><?php if($operation->reev<0) echo html_entity_decode(abs($operation->reev)); ?></a></td>
 										   
@@ -237,7 +237,7 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
     ],
     "searching": true,
     "paging":true,
-    "ordering": false,
+    "ordering": true,
     "scrollX": "170%", 
 
 

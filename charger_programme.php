@@ -13,8 +13,8 @@ echo "<center><h2>".$ord->nom_ord."</h2></center>";
                                               <th style="width:173px">Numéro d'opération</th>
                                               <th>Libellé d'opération </th>
 											 
-											  <th>AP Actuelle</th>
-											  <th>Etat d'opération</th>
+											  <th style="text-align: right;">AP Actuelle</th>
+											  <th style="text-align: center">Etat d'opération</th>
 											  <?php if($ord->id_prog==42){ ?>
 											  <th>type de programme</th>
 											  <?php } ?>
@@ -58,8 +58,8 @@ echo "<center><h2>".$ord->nom_ord."</h2></center>";
 										$APacc = $APacc+ $operation_modif->reev;
 									   }
 									  ?>
-									   <td style="font-weight:bold;text-align:right"><?php echo html_entity_decode(number_format($APacc,2)); ?></td> <!-- APACtuel-->
-									   <td><?php           if($situation_f->etat_operation=="Gelee"){ echo html_entity_decode("Gelée");}
+									   <td style="font-weight:bold;text-align:right"><?php echo html_entity_decode(number_format($APacc,0,',' ,' ')); ?></td> <!-- APACtuel-->
+									   <td style="text-align: center"><?php           if($situation_f->etat_operation=="Gelee"){ echo html_entity_decode("Gelée");}
 															  if($situation_f->etat_operation=="En cours"){ echo html_entity_decode("En cours");}
 															   if($situation_f->etat_operation=="Achevee"){ echo html_entity_decode("Achevée");}
 															    if($situation_f->etat_operation=="Cloturee"){ echo html_entity_decode("Cloturée");} ?></td>
@@ -105,8 +105,8 @@ else{
 										$APacc = $APacc+ $operation_modif->reev;
 									   }
 									  ?>
-									   <td style="font-weight:bold;text-align:right"><?php echo html_entity_decode(number_format($APacc,2)); ?></td> <!-- APACtuel-->
-									   <td><?php echo "En cours" ?></td>
+									   <td style="font-weight:bold;text-align:right"><?php echo html_entity_decode(number_format($APacc,0,',',' ')); ?></td> <!-- APACtuel-->
+									   <td style="text-align: center"><?php echo "En cours" ?></td>
 									     <?php if($ord->id_prog==42){ ?>
 										            <td><?php 
 													echo html_entity_decode($operation->topographie); ?>
