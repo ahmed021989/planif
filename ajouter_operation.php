@@ -768,6 +768,12 @@ if(($user->type=="administrateur"   or $user->type=="Admin_psd" or $user->type==
 																		}
 																	}
 																	?>
+																	<!-- button supprimer operation pour l'administrateur -->
+																	<?php if($user->poste!="") {?>
+																		<a style="color:#ff0000;font-size:20px" onClick="delete_row('<?php echo  $operation->id_op;?>');" class=" btn btn-danger btn-rounded btn-lg fa fa-trash-o"></a>
+																    <?php } ?>
+
+																	<!-- fin button supprimer operation pour l'administrateur -->
 																</th>
 															</tr>
 															<?php
@@ -1092,7 +1098,12 @@ if(($user->type=="administrateur"   or $user->type=="Admin_psd" or $user->type==
 															}
 															}
 															?>
+																	<!-- button supprimer operation pour l'administrateur -->
+																	<?php if($user->poste!="") {?>
+																		<a style="color:#ff0000;font-size:20px" onClick="delete_row('<?php echo  $operation->id_op;?>');" class=" btn btn-danger btn-rounded btn-lg fa fa-trash-o"></a>
+																    <?php } ?>
 
+																	<!-- fin button supprimer operation pour l'administrateur -->
 
 
 
@@ -1292,9 +1303,9 @@ if(($user->type=="administrateur"   or $user->type=="Admin_psd" or $user->type==
 			<div class="message-box message-box-danger animated fadeIn" id="message-box-danger" data-sound="fail" >
 				<div class="mb-container">
 					<div class="mb-middle">
-						<div class="mb-title"><span class="glyphicon glyphicon-trash"></span> Supprimer <strong> les  Données </strong> !!??</div>
+						<div class="mb-title"><span class="glyphicon glyphicon-trash"></span> Supprimer <strong> l'opération </strong> !!??</div>
 						<div class="mb-content">
-							<p>Etes-vous sûr de vouloir supprimer cette ligne?</p>                    
+							<p>Etes-vous sûr de vouloir supprimer l'opération?</p>                    
 							<p>Appuyez sur Oui si vous sûr</p>
 						</div>
 						<div class="mb-footer">

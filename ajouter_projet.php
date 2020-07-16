@@ -475,6 +475,9 @@ function lister_projet($ordonnateur,$user){
 									<th rowspan="2" style="width:200px">Mise à jour<br><br></th>
 									<th rowspan="2">Opérations planifiées<br><br></th>
 									<th rowspan="2">Observation<br><br></th>
+									<?php  if($user->poste!=""){ ?>
+									<th rowspan="2">Infrastructure<br><br></th>
+								    <?php } ?>
 									<th rowspan="2">Etat du projet<br><br></th>
 									<th rowspan="2">Réévaluation demandée<br><br></th>
 									<th rowspan="2">Date de mise en service<br><br></th>
@@ -509,7 +512,9 @@ function lister_projet($ordonnateur,$user){
 
 													<tr id ="<?php echo html_entity_decode($projet->id_projet); ?>">
 														<th style="background:#f1f5f9">
+														
 															<?php 
+														    
 															$sql1=$bd->requete("select * from projet_supr where valide=0 and id_projet=".$projet->id_projet."");
 															
 															if (mysqli_num_rows($sql1)!=0 ){ 
@@ -563,6 +568,25 @@ function lister_projet($ordonnateur,$user){
 																<?php 
 																if($situation_ph = Situation_ph::trouve_par_projet($projet->id_projet)){
 																	?>
+																	<td>
+																		<?php
+																	if($user->poste!=''){
+																		$infra=Infrastructure::trouve_par_id($projet->id_infra);
+																		?>
+																		<select id="<?php echo "1".$projet->id_projet;?>" onchange="change_infra(<?php echo $projet->id_projet;?>);">
+																			<option value="<?php echo $infra->id_infra; ?>"><?php echo $infra->nom_infra; ?></option>
+																		
+																		<?php
+																		$infra2=Infrastructure::trouve_tous();
+																		foreach ($infra2 as $infra2) {
+																		?>
+																		<option value="<?php echo $infra2->id_infra; ?>"><?php echo $infra2->nom_infra; ?></option>
+																		<?php
+																		}
+																	   }
+																	   ?>
+																	   </select>
+																	</td>
 																	<td id="<?php echo $situation_ph->etat_projet;  ?>"><?php
 																	if($situation_ph->etat_projet=="Gele"){ echo html_entity_decode("Gelé");}
 																	if($situation_ph->etat_projet=="En cours"){ echo html_entity_decode("En cours");}
@@ -919,6 +943,30 @@ $('#mb-modifier').hide();
 $('#mb-supr_projt').hide(); 
 })
 
+
+
+function change_infra(id){
+
+	var programme =$("#1"+id+" :selected").val();
+
+	//alert(id);
+	
+	$.ajax({
+
+		method:"post",
+		url:"ajax_change_infra_projet.php",
+		data:{ id:id ,programme:programme},
+		success:function(resultData){
+			alert(resultData);
+			
+location.reload();
+
+
+		}
+	})
+
+
+}
 </script> 
 
 <style>

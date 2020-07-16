@@ -546,6 +546,7 @@
 						<li><a href="ajouter_ordonnateur.php"><span class="fa  fa-check-square-o" style="font-size:15px"> </span>Ordonnateurs </a></li>
 					
 						<li><a href="ajouter_type_programme.php"><span class="fa fa-sitemap" style="font-size:15px"> </span> Type de programme </a></li>
+						<li><a href="operations.php"><span class="fa fa-tag" style="font-size:15px"> </span> Opérations </a></li>
 						
                  
                                                
@@ -592,8 +593,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|42" style="font-size:13px"><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement </a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|42" ><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement </a>
 				
                   </li>
 				  
@@ -631,8 +631,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|41" style="font-size:13px"><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement  </a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|41" ><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement  </a>
 				
                   </li>
 				  
@@ -730,8 +729,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|41" style="font-size:13px"><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement </a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|41"><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement </a>
 				
                   </li>
 				  
@@ -802,8 +800,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|42" style="font-size:13px"><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement  </a>
+				  <li> <a href="ajouter_operation.php?id_projet=0|r5|42"><span class="fa  fa-gear" > </span>Réhabilitation/Aménagement  </a>
 				
                   </li>
 				  
@@ -884,8 +881,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|42" style="font-size:13px"><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement  </span></a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|42" ><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement  </span></a>
 				
                   </li>
 				  
@@ -951,8 +947,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|41" style="font-size:12px"><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement </span> </a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|41"><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement </span> </a>
 				
                   </li>
 				  
@@ -1018,8 +1013,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|41" style="font-size:12px"><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement  </span></a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|41" ><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement  </span></a>
 				
                   </li>			
 
@@ -1080,8 +1074,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|41" style="font-size:12px"><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement </span> </a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|41" ><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement </span> </a>
 				
                   </li>
 						
@@ -1134,8 +1127,7 @@
                   </li>
 				  
 				  
-				  <li>
-					  <a href="ajouter_operation.php?id_projet=0|r5|41" style="font-size:12px"><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement </span> </a>
+				  <li><a href="ajouter_operation.php?id_projet=0|r5|41" ><span class="fa  fa-gear" > </span><span class= "xn-text">Réhabilitation/Aménagement </span> </a>
 				
                   </li>
 						<!--<li class="xn-openable"   >
