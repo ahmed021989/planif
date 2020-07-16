@@ -168,7 +168,7 @@ $pdf->AddPage('L', 'A4');
 											 } 
 									   $operation = Operation:: trouve_par_id($situation_f->id_op);
 									   	if ($APacc!=0){$taux =(number_format($situation_f->paiements/$APacc*100,2,'.','').'%');}else $taux =0.00;
-	$html.='<tr><td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$type_pro.' </td><td> '.$operation->date_inscription.' </td><td> '.$operation->ap_initial.' </td><td> '.$APacc.' </td><td> '.$situation_f->ap_engag.' </td><td> '.$situation_f->paiements.' </td><td> '.($APacc-$situation_f->paiements).' </td><td> '.$taux.' </td><td> '.$situation_f->obs.' </td></tr>';										 
+	$html.='<tr><td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$type_pro.' </td><td> '.$operation->date_inscription.' </td><td> '.number_format($operation->ap_initial,0,',',' ').' </td><td> '.number_format($APacc,0,',',' ').' </td><td> '.number_format($situation_f->ap_engag,0,',',' ').' </td><td> '.number_format($situation_f->paiements,0,',',' ').' </td><td> '.number_format($APacc-$situation_f->paiements,0,',',' ').' </td><td> '.$taux.' </td><td> '.$situation_f->obs.' </td></tr>';										 
 	//  $html='<tr><td>'.$ordonnateur->nom_ord.'</td> <td>'.$operation->libelle_op.'</td><td>'.$operation->code_type_prog.'</td><td>'.$operation->date_inscription.'</td><td>'.$operation->ap_initial.'</td><td>'.$APacc.'</td><td>'.$situation_f->paiements.'</td><td>'.($APacc-$situation_f->paiements).'</td><td>'.$taux.'</td><td>'.$situation_f->obs.'</tr>';
 
                               
@@ -190,7 +190,7 @@ if($situation_f->etat_operation!='Cloturee'  and($user->type=='Admin_psc' or $us
 																		   $ordonnateur = Ordonnateur:: trouve_par_id($operation->id_ord);
 									   $operation = Operation:: trouve_par_id($situation_f->id_op);
 									   									   if ($APacc!=0){$taux =(number_format($situation_f->paiements/$APacc*100,2,'.','').'%');}else $taux =0.00;
-	$html.='<tr> <td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$operation->date_inscription.' </td><td> '.$operation->ap_initial.' </td><td> '.$APacc.' </td><td> '.$situation_f->ap_engag.' </td><td> '.$situation_f->paiements.' </td><td> '.($APacc-$situation_f->paiements).' </td><td> '.$taux.' </td><td> '.$situation_f->obs.' </td></tr>';										 
+	$html.='<tr> <td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$operation->date_inscription.' </td><td> '.number_format($operation->ap_initial,0,',',' ').' </td><td> '.number_format($APacc,0,',',' ').' </td><td> '.number_format($situation_f->ap_engag,0,',',' ').' </td><td> '.number_format($situation_f->paiements,0,',',' ').' </td><td> '.number_format($APacc-$situation_f->paiements,0,',',' ').' </td><td> '.$taux.' </td><td> '.$situation_f->obs.' </td></tr>';										 
 
                                 
 }
@@ -202,7 +202,7 @@ if($situation_f->etat_operation!='Cloturee'  and($user->type=='Admin_psc' or $us
 }
 else {
 	//if($have_sf=Situation_f::is_trouve_par_operation($operation->id_op)==false){
-				if($user->type=='Admin_psd' or $user->type=='administrateur' or $user->type == 'ministre_SG' or $user->id_ord==$operation->id_ord and   $ord==$operation->id_ord and $ordonnateur->id_prog==42){
+				if(($user->type=='Admin_psd' or $user->type=='administrateur' or $user->type == 'ministre_SG' or $user->id_ord==$operation->id_ord) and   $ord==$operation->id_ord and $ordonnateur->id_prog==42){
                          $APacc=0;
 									if(  $operation=Operation::trouve_par_id($operation->id_op)){
 									  $APacc=$APacc+$operation->ap_initial  ;
@@ -225,13 +225,13 @@ else {
 									   $ordonnateur = Ordonnateur:: trouve_par_id($operation->id_ord);
 									  
 									  
-	  		$html.='<tr> <td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$type_pro.' </td><td> '.$operation->date_inscription.' </td><td> '.$operation->ap_initial.' </td><td> '.$APacc.' </td><td> 0 </td><td> 0 </td><td> '.($APacc).' </td><td> 0.00% </td><td> 0 </td></tr>';										 
+	  		$html.='<tr> <td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$type_pro.' </td><td> '.$operation->date_inscription.' </td><td> '.number_format($operation->ap_initial,0,',',' ').' </td><td> '.number_format($APacc,0,',',' ').' </td><td> 0 </td><td> 0 </td><td> '.number_format($APacc,0,',',' ').' </td><td> 0.00% </td><td> 0 </td></tr>';										 
 
 			}
-            else 
+            else {
 				
 			
-				if($user->type=='Admin_psc' or $user->type=='administrateur' or $user->type == 'ministre_SG' or $user->id_ord==$operation->id_ord and   $ord==$operation->id_ord and $ordonnateur->id_prog==41){
+				if(($user->type=='Admin_psc' or $user->type=='administrateur' or $user->type == 'ministre_SG' or $user->id_ord==$operation->id_ord ) and   $ord==$operation->id_ord and $ordonnateur->id_prog==41){
       $APacc=0;
 									if(  $operation=Operation::trouve_par_id($operation->id_op)){
 									  $APacc=$APacc+$operation->ap_initial  ;
@@ -246,9 +246,10 @@ else {
 									   $ordonnateur = Ordonnateur:: trouve_par_id($operation->id_ord);
 									  
 									  
-	   $html.='<tr> <td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$operation->date_inscription.' </td><td> '.$operation->ap_initial.' </td><td> '.$APacc.' </td><td> 0 </td><td> 0 </td><td> '.($APacc).' </td><td> 0.00% </td><td> 0 </td></tr>';										 
+	   $html.='<tr> <td> '.$operation->num_op.' </td> <td> '.$operation->libelle_op.' </td><td> '.$operation->date_inscription.' </td><td> '.number_format($operation->ap_initial,0,',',' ').' </td><td> '.number_format($APacc,0,',',' ').' </td><td> 0 </td><td> 0 </td><td> '.number_format($APacc,0,',',' ').' </td><td> 0.00% </td><td> 0 </td></tr>';										 
 
              //    }	
+}
 }
 }
 }

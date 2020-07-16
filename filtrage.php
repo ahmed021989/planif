@@ -281,22 +281,22 @@ function filtre($rubrique,$user,$ord,$date,$etat){
                                         <thead>
                                             <tr>
 										
-											<th>Numéro d'opération</th>
-											<th>Intitulé</th>
+											    <th>Numéro d'opération</th>
+											    <th>Intitulé</th>
 											   <?php 
 											   if($ordonnateur->id_prog==42){
 											   ?>
                                                 <th>Type de programme</th>
 											   <?php } ?>
-                                              <th>Date d'inscription </th>
-                                                <th>AP initiale </th>
-												<th>AP actuelle </th>
-												<th>Engagements</th>
-                                                <th>Paiements</th>
-												 <th>PEC</th>
-												 <th>Taux</th>
+                                                <th>Date d'inscription </th>
+                                                <th style="width: 100px">AP initiale </th>
+												<th style="width: 100px">AP actuelle </th>
+												<th style="width: 100px">Engagements</th>
+                                                <th style="width: 100px">Paiements</th>
+												<th style="width: 100px">PEC</th>
+												<th>Taux</th>
 												
-												 <th>Observation</th>
+												<th>Observation</th>
 											
 													
 												
@@ -343,11 +343,11 @@ foreach($operations as $operation){
 											   </td>
 											   <?php } ?>
                                                <td><?php  echo html_entity_decode($operation->date_inscription);  ?></td>
-											   <td><?php  echo html_entity_decode($operation->ap_initial);  ?></td>
-                                               <td><?php echo html_entity_decode($APacc); ?></td> <!-- APACtuel-->
-												 <td><?php  echo html_entity_decode($situation_f->ap_engag);  ?></td>
-												  <td><?php echo html_entity_decode($situation_f->paiements); ?></td>
-												     <td><?php echo html_entity_decode($APacc-$situation_f->paiements); ?></td><!-- PEC-->
+											   <td><?php  echo number_format($operation->ap_initial,0,',',' ');  ?></td>
+                                               <td><?php echo number_format($APacc,0,',',' '); ?></td> <!-- APACtuel-->
+												 <td><?php  echo number_format($situation_f->ap_engag,0,',',' ');  ?></td>
+												  <td><?php echo number_format($situation_f->paiements,0,',',' '); ?></td>
+												     <td><?php echo number_format($APacc-$situation_f->paiements,0,',',' '); ?></td><!-- PEC-->
 						
 												   <td><?php  if ($APacc!=0){echo html_entity_decode (number_format($situation_f->paiements/$APacc*100,2,'.','').'%');}else echo 0.00; ?></td><!-- taux-->
 												  
@@ -380,11 +380,11 @@ if( ($user->type=='Admin_psc' or $user->type=='administrateur' or $user->type ==
 											  <td><?php  echo html_entity_decode($operation->libelle_op);  ?></td>
                                                
                                                 <td><?php  echo html_entity_decode($operation->date_inscription);  ?></td>
-												   <td><?php  echo html_entity_decode($operation->ap_initial);  ?></td>
-                                               <td><?php echo html_entity_decode($APacc); ?></td> <!-- APACtuel-->
-												 	 <td><?php  echo html_entity_decode($situation_f->ap_engag);  ?></td>
-												  <td><?php echo html_entity_decode($situation_f->paiements); ?></td>
-												     <td><?php echo html_entity_decode($APacc-$situation_f->paiements); ?></td><!-- PEC-->
+												   <td><?php  echo number_format($operation->ap_initial,0,',',' ');  ?></td>
+                                               <td><?php echo number_format($APacc,0,',',' '); ?></td> <!-- APACtuel-->
+												 	 <td><?php  echo number_format($situation_f->ap_engag,0,',',' ');  ?></td>
+												  <td><?php echo number_format($situation_f->paiements,0,',',' '); ?></td>
+												     <td><?php echo number_format($APacc-$situation_f->paiements,0,',',' '); ?></td><!-- PEC-->
 						
 												   <td><?php  if ($APacc!=0){echo html_entity_decode (number_format($situation_f->paiements/$APacc*100,2,'.','').'%');}else echo 0.00; ?></td><!-- taux-->
 												  
@@ -437,11 +437,11 @@ else
 											   </td>
 											   <?php } ?>
                                                 <td><?php  echo html_entity_decode($operation->date_inscription);  ?></td>
-												   <td><?php  echo html_entity_decode($operation->ap_initial);  ?></td>
-                                               <td><?php echo html_entity_decode($APacc); ?></td> <!-- APACtuel-->
+												   <td><?php  echo number_format($operation->ap_initial,0,',',' ');  ?></td>
+                                               <td><?php echo number_format($APacc,0,',',' '); ?></td> <!-- APACtuel-->
 												 	 <td><?php  echo html_entity_decode(0);  ?></td>
 												  <td><?php echo html_entity_decode(0); ?></td>
-												     <td><?php echo html_entity_decode($APacc); ?></td><!-- PEC-->
+												     <td><?php echo number_format($APacc,0,',',' '); ?></td><!-- PEC-->
 						
 												   <td><?php   echo 0.00; ?></td><!-- taux-->
 												  
@@ -470,11 +470,11 @@ if(($user->type=='Admin_psc' or $user->type=='administrateur' or $user->type == 
 											  <td><?php  echo html_entity_decode($operation->libelle_op);  ?></td>
                                              
                                                 <td><?php  echo html_entity_decode($operation->date_inscription);  ?></td>
-												   <td><?php  echo html_entity_decode($operation->ap_initial);  ?></td>
-                                               <td><?php echo html_entity_decode($APacc); ?></td> <!-- APACtuel-->
+												   <td><?php  echo number_format($operation->ap_initial,0,',',' ');  ?></td>
+                                               <td><?php echo number_format($APacc,0,',',' '); ?></td> <!-- APACtuel-->
 												 	 <td><?php  echo html_entity_decode(0);  ?></td>
 												  <td><?php echo html_entity_decode(0); ?></td>
-												     <td><?php echo html_entity_decode($APacc); ?></td><!-- PEC-->
+												     <td><?php echo number_format($APacc,0,',',' '); ?></td><!-- PEC-->
 						
 												   <td><?php   echo 0.00; ?></td><!-- taux-->
 												  

@@ -568,11 +568,12 @@ function lister_projet($ordonnateur,$user){
 																<?php 
 																if($situation_ph = Situation_ph::trouve_par_projet($projet->id_projet)){
 																	?>
-																	<td>
+																	
 																		<?php
 																	if($user->poste!=''){
 																		$infra=Infrastructure::trouve_par_id($projet->id_infra);
 																		?>
+																		<td>
 																		<select id="<?php echo "1".$projet->id_projet;?>" onchange="change_infra(<?php echo $projet->id_projet;?>);">
 																			<option value="<?php echo $infra->id_infra; ?>"><?php echo $infra->nom_infra; ?></option>
 																		
@@ -585,8 +586,9 @@ function lister_projet($ordonnateur,$user){
 																		}
 																	   }
 																	   ?>
+																	   </td>
 																	   </select>
-																	</td>
+																	
 																	<td id="<?php echo $situation_ph->etat_projet;  ?>"><?php
 																	if($situation_ph->etat_projet=="Gele"){ echo html_entity_decode("Gelé");}
 																	if($situation_ph->etat_projet=="En cours"){ echo html_entity_decode("En cours");}
