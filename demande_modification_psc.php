@@ -90,10 +90,15 @@ else{
 		
 	
 		//$sql2=$bd->requete("update  operation set code_type_prog='".$_POST['code_type_prog']."' where id_op='$id'");
-		$sql2=$bd->requete("update  operation set num_op='".$_POST['num_oper']."' where id_op='$id'");
+     //echo "<script>alert('".$_POST['num_op']. "');</script>";
+      if(isset($_POST['num_op'])){
+		$sql2=$bd->requete("update  operation set num_op='".$_POST['numero_op']."' where id_op='$id'");
+    }
+      if(isset($_POST['nom_op'])){
 		$sql3=$bd->requete("update  operation set libelle_op='".$_POST['nom_oper']."' where id_op='$id'");
+    }
 		//echo "<script>alert('votre demande envoyer '); </script>";
-		echo "<script>alert('votre demande a été envoyée! ');window.location.replace('ajouter_operation.php?id_projet=".$_GET['id_projet']."');</script>";
+		echo "<script>alert('Modification ! ');window.location.replace('ajouter_operation.php?id_projet=".$_GET['id_projet']."');</script>";
 		
  		}else{
 		// errors occurred
@@ -157,9 +162,9 @@ if ($user->type =='administrateur' or 'Admin_dsp' or 'Admin_ehs'or 'Admin_chu'or
                                                 <label class="col-md-3 control-label">Choisir le champs à modifier</label>
                                                 <div class="col-md-6"> 
 
-    <input type="checkbox" name="num_op" id="num_op" style="width:20px;height:20px;background-color:#399"  value="Numéro operation" onclick="change();"  > Numéro de l'opération
+    <input type="checkbox" name="num_op" id="num_op" style="width:20px;height:20px;background-color:#399"  value="1" onclick="change();"  > Numéro de l'opération
 &nbsp;&nbsp;
-    <input type="checkbox" name="nom_op" id="nom_op" style="width:20px;height:20px;background-color:#399"  value="Nom operation" onclick="change();"  > Intitulé de l'opération
+    <input type="checkbox" name="nom_op" id="nom_op" style="width:20px;height:20px;background-color:#399"  value="2" onclick="change();"  > Intitulé de l'opération
 	    <input type="checkbox" name="code_type_prog" id="code_type_prog" style="width:20px;height:20px;background-color:#399"  value="Type programme" onclick="change();"  >Type de programme
 &nbsp;&nbsp;                                
 									   </div>
